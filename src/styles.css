@@ -1,0 +1,139 @@
+:root {
+  font-family: monospace;
+  font-size: 1rem;
+
+  --background-color: #f5f5dc;
+  --color: #333;
+  ---color: #000000;
+  --button-background-color: #ffcc00;
+  --button-color: #000000;
+  --button-hover: #d6ac03;
+
+  --yellow-background-color: #ffffcc;
+  --yellow-color: #333;
+  --yellow--color: #ff9900;
+  --yellow-button-background-color: #ffcc00;
+  --yellow-button-color: #fff;
+  --yellow-button-hover: #d6ac03;
+
+  --blue-background-color: #123456;
+  --blue-color: #fff;
+  --blue--color: #fff;
+  --blue-button-background-color: #0066ff;
+  --blue-button-color: #fff;
+  --blue-button-hover: #044dbb;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.status-circle {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-left: 5px;
+}
+
+.red {
+  background-color: #ff0000;
+}
+
+.green {
+  background-color: #00ff00;
+}
+body {
+  margin: 0 auto;
+  padding: 0 1rem 0 1rem;
+  max-width: 800px;
+  text-overflow: clip;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+svg {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0 0.5rem 0;
+  justify-content: space-between;
+}
+
+.theme {
+  background-color: var(--background-color);
+  color: var(--color);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.theme menu {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+
+.theme input[type='submit'], .theme input[type='text'] {
+  font-size: 1.2rem;
+  height: 2.4rem;
+
+}
+
+.theme input[type='submit'] {
+  width: 5rem;
+  background-color: var(--button-background-color);
+  color: var(--button-color);
+  border: none;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  margin-left: 2rem;
+  padding: 0.1rem 1.5rem 0.1rem 1.5rem;
+
+}
+
+.theme input[type='text'] {
+  border: none;
+  border-radius: 0.2rem;
+  width: 100%;
+  padding: 0.3rem 0.6rem 0.3rem 0.6rem;
+}
+
+.theme input[type='text']:focus {
+  outline: none;
+}
+
+.theme input[type='submit']:hover {
+  background-color: var(--button-hover);
+}
+
+
+.theme.dark {
+  --background-color: var(--blue-background-color);
+  --color: var(--blue-color);
+  ---color: var(--blue--color);
+  --button-background-color: var(--blue-button-background-color);
+  --button-color: var(--blue-button-color);
+  --button-hover: var(--blue-button-hover);
+}
+
+
