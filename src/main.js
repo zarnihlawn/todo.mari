@@ -9,10 +9,7 @@ check_file_exist();
 async function load_data() {
     try {
         let data = await invoke("load_data");
-        console.log(data);
-
         display_all_data(data);
-
     } catch (error) {
         console.error("Error loading data:", error);
     }
@@ -27,10 +24,10 @@ function display_all_data(data) {
   data.tasks.slice().reverse().forEach((task) => {
     const taskListItem = document.createElement('li');
     taskListItem.textContent = task.title;
+    taskListItem.id = task.id; // Set the id attribute
 
     const statusCircle = document.createElement('span');
     statusCircle.className = 'status-circle';
-    console.log(statusCircle);
 
     if (task.status === false) {
       statusCircle.classList.add('red');
@@ -41,18 +38,25 @@ function display_all_data(data) {
     taskListItem.appendChild(statusCircle);
     taskList.appendChild(taskListItem);
   });
+
+  attachStatusCircleEventListeners();
 }
 
 async function add_data(title) {
-    try {
-      await invoke("add_data", { invokeMessage: title }); 
-    } catch (error) {
-      console.log(error);
-    }
+  await invoke("add_data", { invokeMessage: title }); 
+  load_data();
 }
 
 async function delete_data(id) {
-    
+
+}
+
+async function edit_status(id, status) {
+  try {
+    await invoke('edit_status', { args: { id, status } });
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 
@@ -72,5 +76,31 @@ add_submit_button.addEventListener('click', (e) => {
         new_task_input.value = "";
 
     }
-
 })
+
+const statusCircles = document.getElementsByClassName('status-circle');
+
+function attachStatusCircleEventListeners() {
+  const statusCircles = document.getElementsByClassName('status-circle');
+  Array.from(statusCircles).forEach((statusCircle) => {
+    console.log(`Attached event listener to ${statusCircle}`);
+    statusCircle.addEventListener('click', (e) => {
+      e.preventDefault();
+      const currentColor = statusCircle.classList.contains('red') ? 'red' : 'green';
+      const currentId = e.target.parentNode.id;
+
+      const result = edit_status(currentId, currentColor);
+
+      if (result === true) {
+        if (currentColor === 'red') {
+          statusCircle.classList.remove('red');
+          statusCircle.classList.add('green');
+        } else {
+          statusCircle.classList.remove('green');
+          statusCircle.classList.add('red');
+        }
+      }
+      
+    });
+  });
+}
